@@ -1,0 +1,31 @@
+[
+    {
+        "id":"1", 
+        "purchaseId":"1", 
+        "purchaseItems":[
+            { "id":"1", 
+            "name":"1", 
+            "description":"great whisky", 
+            "DateAdded":"12-09-1998", 
+            "Price":"50.98"
+             },
+            { "id":"2", 
+            "userId":"2", 
+            "date":"12-09-2022", 
+            "totalPurchasePrice":"41.09"}
+            
+        ]
+    },
+    { 
+        "id":"2", 
+        "email":"anna.smith@example.com", 
+        "name":"Anna", 
+        "lastName":"Smith", 
+        "birthday":"13-04-1976", 
+        "password":"superComm0n",
+        "purchases":[
+            { "id":"3", "userId":"1", "date":"12-09-2022", "totalPurchasePrice":"50.98"}
+        ]
+    },
+    { "id":"3", "email":"peter.jones@example.com", "name":"Peter", "lastName":"Jones", "birthday":"24-03-1988", "password":"av3rag3Complicated"}
+]
