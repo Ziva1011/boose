@@ -17,9 +17,8 @@ import {
 import {useState} from 'react';
 
 const CustomWrapper = ({ user=user}) => {
-
-
-  return ( user && user._id ? (
+  console.log(sessionStorage)
+  return ( sessionStorage ? (
           <Navigate to="/purchases" />
         ) : (
           <Navigate to="/login" />
@@ -34,16 +33,17 @@ function App() {
 const [user,setLoginUser] = useState({  })
 
   return (
-    <div className="App">
-      <NavMenu/>
+    <div >
       <Router>
-        <Routes>
-          <Route exact path="/" element={<CustomWrapper user={user}/>} />
-          <Route exact path="/login" element={<Login setLoginUser={setLoginUser}/>} />
-          <Route path="/purchases" element={<Purchase props={user}/>} />
-        </Routes>
-
-        </Router>
+        <NavMenu/>
+        <div className="App container">
+          <Routes>
+            <Route exact path="/" element={<CustomWrapper user={user}/>} />
+            <Route exact path="/login" element={<Login setLoginUser={setLoginUser}/>} />
+            <Route path="/purchases" element={<Purchase props={user}/>} />
+          </Routes>
+        </div>
+      </Router>
 
     </div>
   );

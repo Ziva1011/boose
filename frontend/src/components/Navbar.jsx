@@ -1,18 +1,47 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar'
+import React,{useEffect, useState} from 'react'
+import axios from 'axios';
+import { Link,useNavigate } from "react-router-dom";
 
 function NavMenu(){
+
+    const history = useNavigate()
+    
+    const handleLogout = (e)=>{
+        e.preventDefault();
+        console.log("handler")
+        sessionStorage.clear();
+        console.log(sessionStorage)
+        history("/login")
+        //return <Link to="/login" />
+
+        // axios.get("http://localhost:3000/logout")
+        // .then(res=>{
+        //     if (res.status==200){
+        //         //setLoginUser(res.data.name)
+        //         console.log("sucess") 
+        //         console.log(res)
+        //         sessionStorage.clear();
+        //         return <Link to="/login" />
+        //     }
+        // })
+        // .catch(function (error) {
+        //     console.log(error);  
+        //     sessionStorage.clear();
+        //     return <Link to="/login" />
+        // });
+    }
+
     return (
         <>
-            <Navbar bg="dark" fixed="sticky">
+            <Navbar bg="dark">
                 <Container>
-                    <Navbar.Brand className="text-navbar" href="/">Boose Me</Navbar.Brand>
-                    {/* <Nav className="ms-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/100ui">100 UI</Nav.Link>
-                        <Nav.Link href="/aboutme">About me</Nav.Link>
-                    </Nav> */}
+                    <Navbar.Brand className="text-navbar" href="">Boose Me</Navbar.Brand>
+                    <Nav className="ms-auto">
+                        <Nav.Link  className="text-navbar" onClickCapture={handleLogout}>Logout</Nav.Link>
+                    </Nav> 
                 </Container>
             </Navbar>
         </>
