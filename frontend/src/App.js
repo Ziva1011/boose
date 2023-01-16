@@ -1,7 +1,11 @@
 
-import './App.css';
+import './stylesheets/application.scss';
+import "bootstrap/dist/css/bootstrap.min.css"
+
 import Purchase from "./components/Purchase"
 import Login from "./components/User"
+import NavMenu from "./components/Navbar"
+
 import {
   BrowserRouter as Router, 
   Routes, 
@@ -31,6 +35,7 @@ const [user,setLoginUser] = useState({  })
 
   return (
     <div className="App">
+      <NavMenu/>
       <Router>
         <Routes>
           <Route exact path="/" element={<CustomWrapper user={user}/>} />
