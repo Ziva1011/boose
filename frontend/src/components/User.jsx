@@ -34,11 +34,14 @@ const history = useNavigate()
                 history("/purchases", "1")
             }
             else{
+                console.log("there was nothing")
                 alert("Login failed: Wrong credentials")    
             }
+            console.log(res)
         }
         )
-        .catch(function (error) {
+        .catch((error) =>{
+            alert("Login failed: Wrong credentials")
             console.log(error);  
         });
     }
@@ -49,16 +52,16 @@ const history = useNavigate()
             <h2 className='font-size-h2'>Login</h2>
         <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Name</Form.Label>
-            <Form.Control type="string" name="name" value={user.name}  onChange={handleChange} placeholder="Your name" />
+            <Form.Control type="string" required name="name" value={user.name}  onChange={handleChange} placeholder="Your name" />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Last Name</Form.Label>
-            <Form.Control type="string" name="lastName" value={user.lastName}  onChange={handleChange} placeholder="Your last name" />
+            <Form.Control type="string" required name="lastName" value={user.lastName}  onChange={handleChange} placeholder="Your last name" />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Birthday</Form.Label>
-            <Form.Control type="date"  name="birthday" value={user.birthday}  onChange={handleChange} placeholder="Your birthday" />
+            <Form.Control type="date" required name="birthday" value={user.birthday}  onChange={handleChange} placeholder="Your birthday" />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
