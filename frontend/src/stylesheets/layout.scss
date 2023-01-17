@@ -5,10 +5,12 @@
 
 }
   
-body{
+.body{
   width:100%;
   background-color: $background-color;
   font-family: $font-family;
+  height:100vh;
+  background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallup.net%2Fwp-content%2Fuploads%2F2017%2F03%2F28%2F321573-wood-wooden_surface-whisky-barrels-cellars-numbers-nails.jpg&f=1&nofb=1&ipt=3699e482bcc381945e24ba51c423f47d003a9b451d6a7ba527e60af4a2bde9c2&ipo=images");
 }
 
 .text-navbar{
@@ -29,12 +31,16 @@ body{
 .content-login{
   margin-left: auto;
   margin-right: auto;
-  max-width:500px
+  max-width:500px;
+  background-color: $background-color-opacity;
+  padding:20px;
+  border-radius: 10px;
+  opacity:0.9;
 }
 
 .btn-login{
   background-color: $primary-color !important;
-  border: 0px solid black;
-  font-weight: 600px;
+  border: 0px solid black !important;
+  font-weight: 600;
   width:100%;
 }
