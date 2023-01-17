@@ -3,6 +3,7 @@ import './stylesheets/application.scss';
 import "bootstrap/dist/css/bootstrap.min.css"
 
 import Purchase from "./components/Purchase"
+import Purchases from "./components/Purchases"
 import Login from "./components/User"
 import NavMenu from "./components/Navbar"
 import React,{useEffect} from 'react'
@@ -15,13 +16,12 @@ import {
 
 } from "react-router-dom";
 
-import {useState} from 'react';
 
 const CustomWrapper = ({}) => {
   return ( sessionStorage.length==0 ? (
-          <Navigate to="/purchases" />
-        ) : (
           <Navigate to="/login" />
+        ) : (
+          <Navigate to="/purchases" />
         )
   );
 };
@@ -39,9 +39,10 @@ function App() {
         <NavMenu/>
         <div className="App container">
           <Routes>
-            <Route exact path="/" element={<CustomWrapper />} />
+            <Route path="/" element={<CustomWrapper />} />
             <Route exact path="/login" element={<Login />} />
-            <Route path="/purchases" element={<Purchase/>} />
+            <Route path="/purchases" element={<Purchases/>} />
+            <Route path="/purchases/:id" element={<Purchase/>} />
           </Routes>
         </div>
       </Router>
