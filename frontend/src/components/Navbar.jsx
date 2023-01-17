@@ -1,8 +1,8 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar'
-import React,{useEffect, useState} from 'react'
-import { Link,useNavigate } from "react-router-dom";
+import React from 'react'
+import {useNavigate } from "react-router-dom";
 import { FiLogOut } from 'react-icons/fi';
 
 function NavMenu(){
@@ -40,7 +40,7 @@ function NavMenu(){
                 <Container>
                     <Navbar.Brand className="text-navbar" href="">Boose Me</Navbar.Brand>
                     <Nav className="ms-auto">
-                        <Nav.Link  className="text-navbar" onClickCapture={handleLogout}>Logout <FiLogOut/></Nav.Link>
+                        {sessionStorage.length>0 && <Nav.Link  className="text-navbar" onClickCapture={handleLogout}>Logout <FiLogOut/></Nav.Link>}
                     </Nav> 
                 </Container>
             </Navbar>
