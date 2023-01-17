@@ -1,47 +1,53 @@
-import {useLocation, Link} from "react-router-dom"
 import React,{useEffect, useState} from 'react'
 import axios from 'axios';
-import Card from "./Card"
+import {Link, useLocation} from "react-router-dom"
 
 const Purchase = (props) => {
-    const [purchases,setPurchases] = useState([])
-    const addPurchase=(value)=> {
-        setPurchases([...value]);
+    const location = useLocation();
+    const purchase = location.state
+    const [items,setItems] = useState([])
+
+    const addItems=(value)=> {
+        setItems([value]);
     }
+
 
     useEffect(() => {
         const userId ={
             token: sessionStorage.getItem("token")
         };
-        
-        axios.post('http://localhost:3000/purchases',  userId)
+        console.log(sessionStorage.length)
+        axios.post('http://localhost:3000/items',  userId)
         .then(res=>{
             if (res.data){
-                console.log("Sucess")
-                console.log(res.data)
-                addPurchase(res.data.purchases)
+                console.log("Login Successful")
+                addItems(res.data)
             }
             else{
-                alert("No purchases found") 
-                sessionStorage.clear() 
-                return <Link to="/login"/>
+                alert("No items found") 
             }
         }
         )
         .catch(function (error) {
             console.log(error); 
-            sessionStorage.clear() 
-            return <Link to="/login"/>
         });
-      }, []);
+        }, []);
 
-      
-    const location = useLocation();
     return (
         <>
-            <div className="content">
-                <h2 className="mt-3 font-size-h2">My purchases </h2>
-                {purchases.map(d => (<Card  purchase={d}/>))}
+            <div class="container content-login">
+                <Link to='/purchases'> Back</Link>
+                <h2 className="mt-3 font-size-h2 mb-3"> Purchase  </h2>
+
+                {purchase.purchaseItems.map(d => <>
+                <hr/>
+                <p>{items.map((el) => {if (el.id==d.itemId){return el.id}})}</p>
+                <p>Item #{d.itemId}</p>
+                <p></p>
+                <p>Amount:{d.quantity}</p>
+                <p>Price: {d.price} €</p>
+                
+                </>)}
 
             </div>
 
