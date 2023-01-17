@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import Purchase from "./components/Purchase"
 import Login from "./components/User"
 import NavMenu from "./components/Navbar"
+import React,{useEffect} from 'react'
 
 import {
   BrowserRouter as Router, 
@@ -16,9 +17,8 @@ import {
 
 import {useState} from 'react';
 
-const CustomWrapper = ({ user=user}) => {
-  console.log(sessionStorage)
-  return ( sessionStorage ? (
+const CustomWrapper = ({}) => {
+  return ( sessionStorage.length==0 ? (
           <Navigate to="/purchases" />
         ) : (
           <Navigate to="/login" />
@@ -29,18 +29,19 @@ const CustomWrapper = ({ user=user}) => {
 
 
 function App() {
-
-const [user,setLoginUser] = useState({  })
+  useEffect(() => {
+    sessionStorage.clear()
+  }, []);
 
   return (
-    <div >
+    <div className='body'>
       <Router>
         <NavMenu/>
         <div className="App container">
           <Routes>
-            <Route exact path="/" element={<CustomWrapper user={user}/>} />
-            <Route exact path="/login" element={<Login setLoginUser={setLoginUser}/>} />
-            <Route path="/purchases" element={<Purchase props={user}/>} />
+            <Route exact path="/" element={<CustomWrapper />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route path="/purchases" element={<Purchase/>} />
           </Routes>
         </div>
       </Router>

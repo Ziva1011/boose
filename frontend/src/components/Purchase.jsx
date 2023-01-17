@@ -13,18 +13,18 @@ const Purchase = (props) => {
         const userId ={
             token: sessionStorage.getItem("token")
         };
-
-        console.log(userId)
-        axios.post("http://localhost:3000/purchases",  userId)
+        
+        axios.post('http://localhost:3000/purchases',  userId)
         .then(res=>{
             if (res.data){
+                console.log("Sucess")
                 console.log(res.data)
                 addPurchase(res.data.purchases)
-                //sessionStorage.clear();
             }
             else{
                 alert("No purchases found") 
-                //sessionStorage.clear();  
+                sessionStorage.clear() 
+                return <Link to="/login"/>
             }
         }
         )
