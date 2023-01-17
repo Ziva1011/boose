@@ -2,15 +2,14 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const repo = require('./repository')
 const jwt = require("jsonwebtoken");
-
 var cors = require('cors')
 
-const app = express()
+require('dotenv').config()
+
 
 
 let _users = require('./users.json');
 let _items = require('./items.json');
-const cookieParser = require('cookie-parser');
 
 
 function getUserPurchases(userId) {
@@ -39,12 +38,10 @@ function hasValue(email,password) {
 
 
 
-
-
+const app = express()
 app.use(cors())
-app.use(cookieParser())
 
-const port = process.env.PORT_BACKEND || 3000
+const port = process.env.PORT_BACKEND || 3001
 
 // The body-parser middleware
 // to parse form data
@@ -63,7 +60,7 @@ app.post('/login', async (req, res) => {
 		if (JSONObject[i].password == password && JSONObject[i].email == email){
 				let id=JSONObject[i].id
 				const token = jwt.sign({id},
-				"poihuz7t6g",{
+				process.env.JWT_SECRET_KEY,{
 				expiresIn: 86400});
 				let user = JSONObject[i];
 				return res
@@ -80,7 +77,7 @@ app.post('/purchases', (req, res) => {
 		throw new Error("Error");
 	}
 	try{
-		var data = jwt.verify(token, "poihuz7t6g")
+		var data = jwt.verify(token, process.env.JWT_SECRET_KEY)
 		userId=  data.id
 	}catch{
 		console.log("Token could not be verified")
