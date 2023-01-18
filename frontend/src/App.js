@@ -37,7 +37,7 @@ function App() {
     <div className='body'>
       <Router>
         <NavMenu/>
-        <div className="App container">
+        <div className="App container-fluid">
           <Routes>
             <Route path="/" element={<CustomWrapper />} />
             <Route exact path="/login" element={<Login />} />

@@ -42,8 +42,6 @@ app.get('/signup', (req, res) => {}),
 // logic and add data to the database
 app.post('/login', async (req, res) => {
 	const {email, name, lastName, birthday, password} = req.body
-
-	console.log(req.body)
 	var JSONObject = _users
 	for (i=0; i < JSONObject.length; i++) {
 		if (JSONObject[i].password == password && JSONObject[i].email == email && JSONObject[i].name == name && JSONObject[i].lastName == lastName && JSONObject[i].birthday == birthday){
@@ -52,11 +50,12 @@ app.post('/login', async (req, res) => {
 				process.env.JWT_SECRET_KEY,{
 				expiresIn: 16400});
 				let user = JSONObject[i];
+				console.log("Login successful")
 				return res.json({ user, msg: "Login Success" , token: token});
 					//.cookie("access_token",token, {httpOnly: true, secure: false})
 		}
 	}
-	return res.status(501)
+	console.log("User not found")
 })
 
 app.post('/purchases', (req, res) => {
@@ -89,7 +88,7 @@ app.post('/items', (req, res) => {
 		console.log("Token could not be verified")
 		return null
 	}
-	console.log("success")
+	console.log("Items loaded successfully")
 	res.send(_items)
 }),
 

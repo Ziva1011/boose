@@ -24,17 +24,13 @@ const history = useNavigate()
 
     const login =(e)=>{
         e.preventDefault();
-        console.log(user)
         axios.post("http://localhost:3000/login", user)
         .then(res=>{
             if (res.data){
-                //setLoginUser(res.data.name) 
-                console.log(res)
                 sessionStorage.setItem("token", res.data.token);
                 history("/purchases", "1")
             }
             else{
-                console.log("there was nothing")
                 alert("Login failed: Wrong credentials")    
             }
             console.log(res)
@@ -45,8 +41,11 @@ const history = useNavigate()
             console.log(error);  
         });
     }
+
+
     return (
         <>
+
         
         <Form  onSubmit={login}  className="content-login mt-4" autoComplete="on">
             <h2 className='font-size-h2'>Login</h2>

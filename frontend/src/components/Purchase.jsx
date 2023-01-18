@@ -1,6 +1,8 @@
 import React,{useEffect, useState} from 'react'
 import axios from 'axios';
 import {Link, useLocation} from "react-router-dom"
+import {FaWineBottle} from'react-icons/fa'
+import {IoMdArrowDropleft} from'react-icons/io'
 
 const Purchase = (props) => {
     const location = useLocation();
@@ -16,7 +18,6 @@ const Purchase = (props) => {
         const userId ={
             token: sessionStorage.getItem("token")
         };
-        console.log(sessionStorage.length)
         axios.post('http://localhost:3000/items',  userId)
         .then(res=>{
             if (res.data){
@@ -35,20 +36,52 @@ const Purchase = (props) => {
 
     return (
         <>
-            <div class="container content-login">
-                <Link to='/purchases'> Back</Link>
-                <h2 className="mt-3 font-size-h2 mb-3"> Purchase  </h2>
-
-                {purchase.purchaseItems.map(d => <>
-                <hr/>
-                <p>{items.map((el) => {if (el.id==d.itemId){return el.id}})}</p>
-                <p>Item #{d.itemId}</p>
-                <p></p>
-                <p>Amount:{d.quantity}</p>
-                <p>Price: {d.price} €</p>
-                
-                </>)}
-
+            <div class="content">
+                <Link to='/purchases' className='back-button'> <IoMdArrowDropleft/> My purchases</Link>
+                <div className="purchase-card mt-3">
+                    <div className='card-top'>
+                        <div className='row'>
+                            <div className='col-md-3'>
+                                <h2 className=" font-size-h2 "> Purchase #{purchase.id}</h2>
+                            </div>
+                            <div className='col ms-auto text-md-end'> 
+                                <div className='row'>
+                                    <div className='col-6'>
+                                    </div>
+                                    <div className='col-3'>
+                                        <p>Purchase Date</p>
+                                        <p>{purchase.date}</p>
+                                    </div>
+                                    <div className='col-3'>
+                                        <p>Total Price</p>
+                                        <p>{purchase.totalPurchasePrice}€</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div className='card-content'>
+                        {purchase.purchaseItems.map(d => <>
+                        <div className='container'>
+                        <div className='row justify-content-center'>
+                            <div className='col-md-2 text-center'> <FaWineBottle className='icon-purchases'/></div>
+                            <div className='col-md'>
+                                <h5>Item#{d.itemId}</h5>
+                                <p>Amount: {d.quantity}</p>
+                                <p>Price (Unt.): {d.price} €</p>
+                            </div>
+                            <div className='col-md-2'>
+                                <p>Price: {d.totalPurchaseItemPrice} €</p>
+                            </div>
+                            <hr/>
+                        </div>
+                        </div>
+                        
+                    
+                    </>)}
+                </div>
+                </div>
             </div>
 
         </>
